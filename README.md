@@ -1,6 +1,7 @@
 # Robotic Grasp Simulation Based on CoppeliaSim
 To verify/test the performance of grasp prediction for text-based objects, we built a generic simulation environment in CoppeliaSim (Vrep) based on a UR3 robot, an RG2 gripper, and an RGB-D camera.
 # MODEL Text-Guided-RGBD-grasp-Generation-simulation
+# Download data-text ([https://drive.google.com/file/d/1AtoURfvkvyOg2I3drIEPsFYUtH7mKCTc/view?usp=sharing])
 ## Requirements
 - Python 3
 - PyTorch 2.3.0
