@@ -15,7 +15,7 @@ Download data-text: https://drive.google.com/file/d/1AtoURfvkvyOg2I3drIEPsFYUtH7
 ## Installation
 Get the code.
 ```bash
-git clone https://github.com/graspnet/graspnet-baseline.git](https://github.com/Thiep1808/Text-Guided-RGBD-grasp-Generation-simulation.git)
+git clone https://github.com/Thiep1808/Text-Guided-RGBD-grasp-Generation-simulation.git
 cd Text-Guided-RGBD-grasp-Generation-simulation
 ```
 Install packages via Pip.
