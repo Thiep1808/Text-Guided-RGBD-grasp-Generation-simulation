@@ -4,7 +4,9 @@ To verify/test the performance of grasp prediction for text-based objects, we bu
 [[paper](https://drive.google.com/file/d/1Y7muh4Q74-IHvj3ZB42fAkvdi6XuVkkY/view?usp=sharing)]
 [[dataset_visual](https://graspnet.net/)]
 [[dataset_text](https://drive.google.com/file/d/1AtoURfvkvyOg2I3drIEPsFYUtH7mKCTc/view?usp=sharing)]
-![teaser](model.pdf)
+
+
+![teaser](model.png)
 ## Requirements
 - Python 3
 - PyTorch 2.3.0
