@@ -7,6 +7,8 @@ To verify/test the performance of grasp prediction for text-based objects, we bu
 
 
 ![teaser](model.png)
+
+
 ## Requirements
 - Python 3
 - PyTorch 2.3.0
@@ -69,4 +71,4 @@ P.S.
 remote_simulation.py loads the trained GR-convNet model to detect the grasping position and pass the relevant information to the server side to guide the grasping;  
 RoboticGraspingWIthUR3_v4.ttt internal UR3 child script implements the control and grasping of the robotic arm  
 ## Results
-[Sample video for Text-Guided-RGBD-grasp-Generation-simulation](https://github.com/Thiep1808/Text-Guided-RGBD-grasp-Generation-simulation/blob/main/final.webm)
+[Sample video for Text-Guided-RGBD-grasp-Generation-simulation](https://github.com/Thiep1808/Text-Guided-RGBD-grasp-Generation-simulation/blob/main/result.mp4)
