@@ -71,4 +71,4 @@ P.S.
 remote_simulation.py loads the trained GR-convNet model to detect the grasping position and pass the relevant information to the server side to guide the grasping;  
 RoboticGraspingWIthUR3_v4.ttt internal UR3 child script implements the control and grasping of the robotic arm  
 ## Results
-[Sample video for Text-Guided-RGBD-grasp-Generation-simulation](https://github.com/Thiep1808/Text-Guided-RGBD-grasp-Generation-simulation/blob/main/result.mp4)
+![Sample video for Text-Guided-RGBD-grasp-Generation-simulation](https://github.com/Thiep1808/Text-Guided-RGBD-grasp-Generation-simulation/blob/main/result.mp4)
