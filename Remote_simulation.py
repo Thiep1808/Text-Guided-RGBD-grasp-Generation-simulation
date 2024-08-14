@@ -206,10 +206,6 @@ if __name__ == '__main__':
     
     with open(file=os.path.join(cfgs.root, 'text_data/data')) as f:
         for i in f.readlines():
-            int_ = 1140
-            random.seed(int_)
-            np.random.seed(int_)
-            torch.manual_seed(int_)
             descript = get_text_data(i)
             err2, sendImages = sim.simxGetStringSignal(sim_client, 'sendImages', sim.simx_opmode_streaming)
             while err2 != sim.simx_return_ok:
