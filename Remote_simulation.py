@@ -30,10 +30,6 @@ parser.add_argument('--collision_thresh', type=float, default=0.1, help='Collisi
 parser.add_argument('--voxel_size', type=float, default=0.01, help='Voxel Size to process point clouds before collision detection [default: 0.01]')
 cfgs = parser.parse_args()
 
-int_ = 1140
-random.seed(int_)
-np.random.seed(int_)
-torch.manual_seed(int_)
 class Vocabulary:
     def __init__(self, freq_threshold=1):
         # Initialize 2 dictionary: index to string and string to index
@@ -128,14 +124,8 @@ def get_and_process_data(data_dir, color, pred, numericalized_descript):
 
     cloud_masked = points * 20
     color_masked = colors
-
-    if len(cloud_masked) >= cfgs.num_point:
-        idxs = np.random.choice(len(cloud_masked), cfgs.num_point, replace=False)
-    else:
-        idxs1 = np.arange(len(cloud_masked))
-        idxs2 = np.random.choice(len(cloud_masked), 300, replace=True)
-        idxs = np.concatenate([idxs1, idxs2], axis=0)
-
+    
+    idxs = np.load('indx.npy')
     cloud_sampled = cloud_masked[idxs]
     color_sampled = color_masked[idxs]
 
@@ -168,13 +158,11 @@ def get_grasps(net, end_points):
 def grasp_parameters(data_dir, checkpoint, color, depth, descript):
     net = get_net(checkpoint)
     end_points, cloud = get_and_process_data(data_dir, color, depth, descript)
-    with torch.no_grad():
-        start_time = time.time()
-        end_points = net(end_points)
-        print("--- %s seconds ---" % (time.time() - start_time))
-        grasp_preds = pred_decode(end_points)
-    gg_array = grasp_preds[0].detach().cpu().numpy()
-    gg = GraspGroup(np.array(gg_array))
+    gg = get_grasps(net, end_points)
+    if cfgs.collision_thresh > 0:
+        gg = collision_detection(gg, np.array(cloud.points))
+    gg.nms()
+    gg.sort_by_score()
     scores, widths, heights, depths, translations, rotation_matrices = gg.value_predict()
     return translations, rotation_matrices
 
@@ -215,7 +203,7 @@ if __name__ == '__main__':
     while err != sim.simx_return_ok:
         err, objectNumber = sim.simxGetIntegerSignal(sim_client, 'objectNumber', sim.simx_opmode_buffer)
     sim.simxClearIntegerSignal(sim_client, 'objectNumber', sim.simx_opmode_oneshot)
-    a = 1
+    
     with open(file=os.path.join(cfgs.root, 'text_data/data')) as f:
         for i in f.readlines():
             int_ = 1140
@@ -228,10 +216,10 @@ if __name__ == '__main__':
                 err2, sendImages = sim.simxGetStringSignal(sim_client, 'sendImages', sim.simx_opmode_buffer)
             print(r'sendImages: %s' % (sendImages))
             date_dir = '/dataset/meta.mat'
-            check_point = f'/logs/checkpoint{str(a)}.tar'
+            check_point = f'/logs/checkpoint4.tar'
             sim.simxClearStringSignal(sim_client, 'sendImages', sim.simx_opmode_oneshot)
             # Acquire RGB Image
-            a += 1
+            
             sim_ret, resolution, raw_image = sim.simxGetVisionSensorImage(sim_client, rgb_cam, 0, sim.simx_opmode_blocking)
             color_img = np.asarray(raw_image)
             color_img.shape = (resolution[1], resolution[0], 3)
