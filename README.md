@@ -7,7 +7,7 @@ To verify/test the performance of grasp prediction for text-based objects, we bu
 
 ![teaser](model.png)
 
-## Results
+## Demo
 ![Sample video for Text-Guided-RGBD-grasp-Generation-simulation](https://github.com/Thiep1808/Text-Guided-RGBD-grasp-Generation-simulation/blob/main/result.gif)
 
 ## Requirements
